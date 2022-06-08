@@ -4,6 +4,7 @@
   --wheat: #efd6acff;
   --sidebar-color: #f1f0ccff;
   --pictorial-carmine: #b6174bff;
+  --content-padding: 30px;
 }
 
 * {
@@ -22,6 +23,21 @@ body {
 .header {
   background-color: var(--header-color);
   grid-column: 1/-1;
+  color: white;
+  display: grid;
+  align-items: center;
+  padding: var(--content-padding);
+}
+
+.logo-container {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+}
+
+.logo {
+  -webkit-filter: invert(100%);
 }
 
 .sidebar {
@@ -32,6 +48,7 @@ body {
 .content{
   grid-row: 2;
   grid-column: 2;
+  padding: var(--content-padding);
 }
 
 ul {
