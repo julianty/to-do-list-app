@@ -4,44 +4,48 @@ import createProject from './createProject';
 
 generateDOM();
 
+const DOMController =  (() => {
+  const ProjectContainer = document.querySelector('div.project-container');
+  const ProjectList = [];
 
-// let ProjectActions = {
-//   _createTask(title, description, dueDate, priority) {
-//     return {
-//       title,
-//       description,
-//       dueDate,
-//       priority
-//     }
-//   },
-//   addTask(title, description, dueDate, priority) {
-//     let Task = this._createTask(title, description, dueDate, priority)
-//     this.taskList.push(Task)
-//   },
-//   printTasks() {
-//     console.log(this.taskList);
-//   },
-//   addToDOM() {
-//     const ProjectDiv = document.createElement('div');
-//     const ProjectName = document.createElement('h4');
-//     ProjectName.textContent = this.name;
+  function createElement(type, className=null) {
+    const element = document.createElement(type);
+    if (className) {
+      element.classList.add(className)
+    }
+    return element
+  }
 
-//     const ProjectContainer = document.querySelector('.content');
-//     ProjectDiv.appendChild(ProjectName)
-//     ProjectContainer.appendChild(ProjectDiv);
-//   },
-// };
+  function listProjects() {
+    ProjectList.forEach(Project => console.log(Project.name));
+  }
 
+  function addToDOM(Project) {
+    ProjectList.push(Project);
+    const NewProject = createElement('div', 'project');
+    const ProjectName = createElement('h4', 'project-title');
+    ProjectName.textContent = Project.name;
+    const TaskList = createElement('ul', 'task-list');
+    Project.taskList.forEach(task => {
+      const TaskUL = createElement('li', 'task');
+      TaskUL.textContent = task.title;
+      TaskList.appendChild(TaskUL);
+    })
+    NewProject.appendChild(ProjectName);
+    NewProject.appendChild(TaskList);
+    ProjectContainer.appendChild(NewProject);
+  }
+  return {
+    listProjects,
+    addToDOM,
+  }
+})();
 
-// function createProject(name, tags=null) {
-//   let Project = Object.create(ProjectActions);
-//   Project.name = name;
-//   Project.tags = tags;
-//   Project.taskList = [];
-//   return Project
-// }
 
 let Project = createProject('firstProject');
-Project.addTask('sometitle');
-Project.printTasks();
-Project.addToDOM();
+Project.addTask('Task 1');
+Project.addTask('Task 2')
+// Project.printTasks();
+// Project.addToDOM();
+DOMController.addToDOM(Project);
+DOMController.listProjects();

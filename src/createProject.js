@@ -13,16 +13,10 @@ let ProjectActions = {
     this.taskList.push(Task)
   },
   printTasks() {
-    console.log(this.taskList);
-  },
-  addToDOM() {
-    const ProjectDiv = document.createElement('div');
-    const ProjectName = document.createElement('h4');
-    ProjectName.textContent = this.name;
-
-    const ProjectContainer = document.querySelector('.content');
-    ProjectDiv.appendChild(ProjectName)
-    ProjectContainer.appendChild(ProjectDiv);
+    // console.log(this.taskList);
+    this.taskList.forEach(element => {
+      console.log(element);
+    });
   },
 };
 

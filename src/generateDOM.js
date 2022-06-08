@@ -7,9 +7,16 @@ export default function generateDOM() {
     return element
   }
 
+  // Create main containers
   const Header = createElement('div', 'header');
   const Sidebar = createElement('div', 'sidebar');
   const Content = createElement('div', 'content');
+
+  // Create first children of main containers
+  const ProjectContainer = createElement('div', 'project-container');
+
+  // Add children to main containers
+  Content.appendChild(ProjectContainer);
 
   // Add the elements to the body
   function addToBody(elementList) {
