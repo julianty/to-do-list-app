@@ -6,8 +6,13 @@ import DOMController from './DOMController';
 generateDOM();
 
 
-let Project = createProject('firstProject');
-Project.addTask('Task 1');
-Project.addTask('Task 2')
-DOMController.addToDOM(Project);
+let firstProject = createProject('firstProject');
+firstProject.addTask('Task 1');
+firstProject.addTask('Task 2');
+
+let secondProject = createProject('secondProject');
+secondProject.addTask('Task 1');
+
+DOMController.addToDOM(firstProject);
+DOMController.addToDOM(secondProject);
 DOMController.listProjects();

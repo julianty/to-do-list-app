@@ -17,9 +17,11 @@ export default function generateDOM() {
   // Create first children of main containers
   const ProjectContainer = createElement('div', 'project-container');
   const LogoContainer = createElement('div', 'logo-container');
+  const ProjectButtonsContainer = createElement('div', 'project-buttons-container')
 
   // Add children to main containers
   Content.appendChild(ProjectContainer);
+  Content.appendChild(ProjectButtonsContainer);
   Header.appendChild(LogoContainer);
 
   // Add the elements to the body

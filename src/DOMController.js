@@ -19,14 +19,17 @@ const DOMController =  {
     const NewProject = this.createElement('div', 'project');
     const ProjectName = this.createElement('h4', 'project-title');
     ProjectName.textContent = Project.name;
-    const TaskList = this.createElement('ul', 'task-list');
+    const TaskUL = this.createElement('ul', 'task-list');
     Project.taskList.forEach(task => {
-      const TaskUL = this.createElement('li', 'task');
-      TaskUL.textContent = task.title;
-      TaskList.appendChild(TaskUL);
+      const TaskItem = this.createElement('li', 'task');
+      const TaskText = this.createElement('span', 'task');
+      TaskText.textContent = task.title;
+      // TaskItem.textContent = task.title;
+      TaskItem.appendChild(TaskText);
+      TaskUL.appendChild(TaskItem);
     })
     NewProject.appendChild(ProjectName);
-    NewProject.appendChild(TaskList);
+    NewProject.appendChild(TaskUL);
     ProjectContainer.appendChild(NewProject);
   }
 }
