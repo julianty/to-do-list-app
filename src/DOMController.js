@@ -31,7 +31,11 @@ const DOMController =  {
     NewProject.appendChild(ProjectName);
     NewProject.appendChild(TaskUL);
     ProjectContainer.appendChild(NewProject);
-  }
+  },
+
+  manageEvent(event) {
+    console.log(event.target.id);
+  },
 }
 
 export default DOMController

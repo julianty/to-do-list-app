@@ -1,4 +1,5 @@
 import ToDoLogo from './ToDoLogo.png';
+import PlusFile from './plus.svg'
 
 export default function generateDOM() {
   function createElement(type, className=null) {
@@ -44,4 +45,12 @@ export default function generateDOM() {
   const LogoText = createElement('p', 'logo-text');
   LogoText.textContent = 'To Do List';
   LogoContainer.appendChild(LogoText);
+
+  // Add Project button controls
+  const Plus = new Image();
+  Plus.src = PlusFile;
+  Plus.id = 'add-project';
+  Plus.classList.add('img-button')
+  ProjectButtonsContainer.appendChild(Plus);
+
 }

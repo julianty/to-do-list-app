@@ -16,3 +16,9 @@ secondProject.addTask('Task 1');
 DOMController.addToDOM(firstProject);
 DOMController.addToDOM(secondProject);
 DOMController.listProjects();
+
+const AddProjectButton = document.getElementById('add-project')
+AddProjectButton.addEventListener('click', e => {
+  // Maybe use an event manager to control this?
+  DOMController.manageEvent(e);
+});
