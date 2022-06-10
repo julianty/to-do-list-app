@@ -2,6 +2,7 @@ import './style.css';
 import generateDOM from './generateDOM';
 import createProject from './createProject';
 import DOMController from './DOMController';
+import EventHandler from './EventHandler';
 
 generateDOM();
 
@@ -20,7 +21,4 @@ DOMController.listProjects();
 firstProject.setStatus('incomplete');
 
 const AddProjectButton = document.getElementById('add-project')
-AddProjectButton.addEventListener('click', e => {
-  // Maybe use an event manager to control this?
-  DOMController.manageEvent(e);
-});
+// AddProjectButton.addEventListener('click', e => EventHandler(e));

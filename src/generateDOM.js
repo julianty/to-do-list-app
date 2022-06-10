@@ -1,5 +1,6 @@
 import ToDoLogo from './ToDoLogo.png';
 import PlusFile from './plus.svg'
+import EventHandler from './EventHandler';
 
 export default function generateDOM() {
   function createElement(type, className=null) {
@@ -52,5 +53,5 @@ export default function generateDOM() {
   Plus.id = 'add-project';
   Plus.classList.add('img-button')
   ProjectButtonsContainer.appendChild(Plus);
-
+  Plus.addEventListener('click', e => EventHandler(e));
 }

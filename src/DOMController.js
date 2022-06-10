@@ -1,3 +1,5 @@
+import EventHandler from "./EventHandler";
+
 const DOMController =  {
   ProjectList: [],
 
@@ -14,12 +16,18 @@ const DOMController =  {
   },
 
   addToDOM(Project) {
+    // Finds container
     const ProjectContainer = document.querySelector('div.project-container');
+    // Adds the project to the list of projects (Might remove this later)
     this.ProjectList.push(Project);
+    // Creates the new container
     const NewProject = this.createElement('div', 'project');
     NewProject.classList.add('incomplete');
+    // Creates the title
     const ProjectName = this.createElement('h4', 'project-title');
     ProjectName.textContent = Project.name;
+    ProjectName.addEventListener('click', e => EventHandler(e));
+    // Generates the task list
     const TaskUL = this.createElement('ul', 'task-list');
     Project.taskList.forEach(task => {
       const TaskItem = this.createElement('li', 'task');
@@ -29,6 +37,8 @@ const DOMController =  {
       TaskItem.appendChild(TaskText);
       TaskUL.appendChild(TaskItem);
     })
+
+    // Appends everything together
     NewProject.appendChild(ProjectName);
     NewProject.appendChild(TaskUL);
     ProjectContainer.appendChild(NewProject);

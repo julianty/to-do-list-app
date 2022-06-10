@@ -1,0 +1,20 @@
+import createProject from "./createProject";
+import DOMController from "./DOMController";
+
+function EventHandler(Event) {
+  const Target = Event.target;
+  const TargetID = Target.id
+  
+  switch (TargetID) {
+    case 'add-project':
+      // Project with dummy header and dummy task
+      const NewProject = createProject('NewProject');
+      DOMController.addToDOM(NewProject);
+      break;
+    default:
+      console.log(TargetID);
+      break;
+  }
+}
+
+export default EventHandler
