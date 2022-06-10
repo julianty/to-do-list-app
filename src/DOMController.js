@@ -17,6 +17,7 @@ const DOMController =  {
     const ProjectContainer = document.querySelector('div.project-container');
     this.ProjectList.push(Project);
     const NewProject = this.createElement('div', 'project');
+    NewProject.classList.add('incomplete');
     const ProjectName = this.createElement('h4', 'project-title');
     ProjectName.textContent = Project.name;
     const TaskUL = this.createElement('ul', 'task-list');
@@ -31,6 +32,7 @@ const DOMController =  {
     NewProject.appendChild(ProjectName);
     NewProject.appendChild(TaskUL);
     ProjectContainer.appendChild(NewProject);
+    return NewProject
   },
 
   manageEvent(event) {

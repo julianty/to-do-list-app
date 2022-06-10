@@ -13,9 +13,11 @@ firstProject.addTask('Task 2');
 let secondProject = createProject('secondProject');
 secondProject.addTask('Task 1');
 
-DOMController.addToDOM(firstProject);
-DOMController.addToDOM(secondProject);
+firstProject.DivContainer = DOMController.addToDOM(firstProject);
+secondProject.DivContainer = DOMController.addToDOM(secondProject);
 DOMController.listProjects();
+
+firstProject.setStatus('incomplete');
 
 const AddProjectButton = document.getElementById('add-project')
 AddProjectButton.addEventListener('click', e => {

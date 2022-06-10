@@ -18,6 +18,22 @@ let ProjectActions = {
       console.log(element);
     });
   },
+
+  setStatus(newStatus) {
+    let statusPool = ['incomplete', 'in-progress', 'completed'];
+    if (statusPool.indexOf(newStatus) == -1) {
+      console.log(`Could not set status to ${newStatus}`);
+      return
+    }
+    if (this.DivContainer == undefined) return
+    this.DivContainer.classList.forEach(divClass => {
+      if (statusPool.indexOf(divClass) !== -1) {
+        this.DivContainer.classList.remove(divClass);
+        this.DivContainer.classList.add(newStatus);
+      }
+    });
+    this.status = newStatus;    
+  },
 };
 
 
@@ -26,6 +42,8 @@ function createProject(name, tags=null) {
   Project.name = name;
   Project.tags = tags;
   Project.taskList = [];
+  Project.status = 'incomplete';
+  Project.DivContainer;
   return Project
 }
 
