@@ -50,8 +50,8 @@ export default function generateDOM() {
   // Add Project button controls
   const Plus = new Image();
   Plus.src = PlusFile;
-  Plus.id = 'add-project';
-  Plus.classList.add('img-button')
+  // Plus.id = 'add-project';
+  Plus.classList.add('add-project-button')
   ProjectButtonsContainer.appendChild(Plus);
   Plus.addEventListener('click', e => EventHandler(e));
 }

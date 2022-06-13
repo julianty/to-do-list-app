@@ -4,9 +4,20 @@ import DOMController from "./DOMController";
 function EventHandler(Event) {
   const Target = Event.target;
   const TargetID = Target.id
+  const TargetClassList = Target.classList;
   
-  switch (TargetID) {
-    case 'add-project':
+  // switch (TargetID) {
+  //   case 'add-project':
+  //     // Project with dummy header and dummy task
+  //     const NewProject = createProject('NewProject');
+  //     DOMController.addToDOM(NewProject);
+  //     break;
+  //   default:
+  //     console.log(TargetID);
+  //     break;
+  // }
+  switch (true) {
+    case TargetClassList.contains('add-project-button'):
       // Project with dummy header and dummy task
       const NewProject = createProject('NewProject');
       DOMController.addToDOM(NewProject);

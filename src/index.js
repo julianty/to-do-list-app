@@ -16,7 +16,6 @@ secondProject.addTask('Task 1');
 
 firstProject.DivContainer = DOMController.addToDOM(firstProject);
 secondProject.DivContainer = DOMController.addToDOM(secondProject);
-DOMController.listProjects();
 
 firstProject.setStatus('incomplete');
 
