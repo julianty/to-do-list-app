@@ -68,9 +68,12 @@ body {
   gap: 5px;
 }
 
-.project-title {
+.project-header {
   background-color: var(--project-title-color);
   padding: 5px;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  justify-content: space-between;
 }
 
 ul.task-list {

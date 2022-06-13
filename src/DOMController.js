@@ -16,11 +16,19 @@ const DOMController =  {
     // Creates the new container
     const NewProject = this.createElement('div', 'project');
     NewProject.classList.add('incomplete');
+    // Creates the project header
+    const ProjectHeader = this.createElement('div', 'project-header');
     // Creates the title
     const ProjectName = this.createElement('h4', 'project-title');
     ProjectName.textContent = Project.name;
     ProjectName.contentEditable = true;
     ProjectName.addEventListener('input', e => EventHandler(e));
+    // Creates the due date
+    const DueDate = this.createElement('h6', 'due-date');
+    DueDate.textContent = 'Due on: '
+    const Date = this.createElement('h6', 'date');
+    Date.textContent = 'click to set date';
+    Date.contentEditable = true;
     // Generates the task list
     const TaskUL = this.createElement('ul', 'task-list');
     Project.taskList.forEach(task => {
@@ -35,7 +43,10 @@ const DOMController =  {
     })
 
     // Appends everything together
-    NewProject.appendChild(ProjectName);
+    ProjectHeader.appendChild(ProjectName);
+    ProjectHeader.appendChild(DueDate);
+    ProjectHeader.appendChild(Date);
+    NewProject.appendChild(ProjectHeader);
     NewProject.appendChild(TaskUL);
     ProjectContainer.appendChild(NewProject);
     return NewProject
