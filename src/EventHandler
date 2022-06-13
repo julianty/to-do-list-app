@@ -1,29 +1,33 @@
 import createProject from "./createProject";
 import DOMController from "./DOMController";
+import RightArrowFile from "./chevron-right.svg";
+import DownArrowFile from "./chevron-down.svg";
 
 function EventHandler(Event) {
   const Target = Event.target;
   const TargetID = Target.id
   const TargetClassList = Target.classList;
   
-  // switch (TargetID) {
-  //   case 'add-project':
-  //     // Project with dummy header and dummy task
-  //     const NewProject = createProject('NewProject');
-  //     DOMController.addToDOM(NewProject);
-  //     break;
-  //   default:
-  //     console.log(TargetID);
-  //     break;
-  // }
   switch (true) {
     case TargetClassList.contains('add-project-button'):
       // Project with dummy header and dummy task
       const NewProject = createProject('NewProject');
       DOMController.addToDOM(NewProject);
       break;
+    case TargetClassList.contains('task-marker'):
+      if (TargetClassList.contains('active')) {
+        Event.target.src = RightArrowFile;
+        Target.parentNode.lastChild.style.display = 'none';
+      } else {
+        Event.target.src = DownArrowFile;
+        // console.log(Target.parentNode.lastChild);
+        Target.parentNode.lastChild.style.display = 'block';
+      }
+      TargetClassList.toggle('active');
+      break;
+
     default:
-      console.log(TargetID);
+      console.log(TargetClassList);
       break;
   }
 }

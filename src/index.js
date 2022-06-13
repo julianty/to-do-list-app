@@ -8,7 +8,7 @@ generateDOM();
 
 
 let firstProject = createProject('firstProject');
-firstProject.addTask('Task 1');
+firstProject.addTask('Task 1', 'dummy description', '06/05/22', 1);
 firstProject.addTask('Task 2');
 
 let secondProject = createProject('secondProject');

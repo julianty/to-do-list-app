@@ -86,6 +86,17 @@ span.task {
   margin-left: -10px
 }
 
+.task-description {
+  grid-column: 2;
+  display: none;
+}
+
+.task-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+}
+
 ul {
   list-style-position: inside;
 }
