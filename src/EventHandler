@@ -1,7 +1,7 @@
-import createProject from "./createProject";
-import DOMController from "./DOMController";
 import RightArrowFile from "./chevron-right.svg";
 import DownArrowFile from "./chevron-down.svg";
+import ProjectController from "./ProjectController";
+
 
 function EventHandler(Event) {
   const Target = Event.target;
@@ -11,8 +11,7 @@ function EventHandler(Event) {
   switch (true) {
     case TargetClassList.contains('add-project-button'):
       // Project with dummy header and dummy task
-      const NewProject = createProject('NewProject');
-      DOMController.addToDOM(NewProject);
+      ProjectController.createProject('NewProject');
       break;
     case TargetClassList.contains('task-marker'):
       if (TargetClassList.contains('active')) {

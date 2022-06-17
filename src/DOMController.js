@@ -1,5 +1,6 @@
 import EventHandler from "./EventHandler";
 import RightArrowFile from "./chevron-right.svg";
+import ProjectController from "./ProjectController";
 
 const DOMController =  {
 
@@ -40,23 +41,24 @@ const DOMController =  {
     // Create task container
     const TasksList = this.createElement('div', 'task-list');
     Project.taskList.forEach(task => {
-      const TaskContainer = this.createElement('div', 'task-container');
-      const TaskMarker = new Image();
-      TaskMarker.src = RightArrowFile;
-      TaskMarker.addEventListener('click', e => EventHandler(e));
+      // const TaskContainer = this.createElement('div', 'task-container');
+      // const TaskMarker = new Image();
+      // TaskMarker.src = RightArrowFile;
+      // TaskMarker.addEventListener('click', e => EventHandler(e));
 
-      TaskMarker.classList.add('task-marker');
-      const TaskText = this.createElement('p', 'task');
-      TaskText.contentEditable = true;
-      TaskText.addEventListener('input', e => EventHandler(e));
-      TaskText.textContent = task.title;
+      // TaskMarker.classList.add('task-marker');
+      // const TaskText = this.createElement('p', 'task');
+      // TaskText.contentEditable = true;
+      // TaskText.addEventListener('input', e => EventHandler(e));
+      // TaskText.textContent = task.title;
 
-      const TaskDescription = this.createElement('p', 'task-description');
-      TaskDescription.textContent = task.description;
-      TaskContainer.appendChild(TaskMarker);
-      TaskContainer.appendChild(TaskText);
-      TaskContainer.appendChild(TaskDescription);
-      TasksList.appendChild(TaskContainer);
+      // const TaskDescription = this.createElement('p', 'task-description');
+      // TaskDescription.textContent = task.description;
+      // TaskContainer.appendChild(TaskMarker);
+      // TaskContainer.appendChild(TaskText);
+      // TaskContainer.appendChild(TaskDescription);
+      // TasksList.appendChild(TaskContainer);
+      TasksList.appendChild(this.createTaskDom(task))
     })
 
     // Appends everything together
@@ -66,9 +68,52 @@ const DOMController =  {
     return NewProject
   },
 
-  manageEvent(event) {
-    console.log(event.target.id);
+  updateDOM() {
+    //Go through each project, check if each task is listed
+    // if not, add them
+    //Grab a list of the projects
+    const ProjectDivs = document.querySelectorAll('.project');
+    // console.log(ProjectDivs);
+    const TaskList = ProjectDivs[0].children[1];
+    // console.log(TaskList.children);
+    const listedTasks = Array.from(TaskList.children)
+                              .map(child => child.textContent);
+    ProjectController.projectList.forEach(project => {
+      project.taskList.forEach(task => {
+        let title = task.title;
+        if (!listedTasks.includes(title)) {
+          console.log(`add ${title} to task list`);
+        };
+      });
+    });
   },
+
+  appendTask(Project, Task) {
+    const TaskList = Project.DivContainer.children[1];
+    TaskList.appendChild(this.createTaskDom(Task));
+  },
+
+  createTaskDom(task) {
+    const TaskContainer = this.createElement('div', 'task-container');
+    const TaskMarker = new Image();
+    TaskMarker.src = RightArrowFile;
+    TaskMarker.addEventListener('click', e => EventHandler(e));
+
+    TaskMarker.classList.add('task-marker');
+    const TaskText = this.createElement('p', 'task');
+    TaskText.contentEditable = true;
+    TaskText.addEventListener('input', e => EventHandler(e));
+    TaskText.textContent = task.title;
+
+    const TaskDescription = this.createElement('p', 'task-description');
+    TaskDescription.textContent = task.description;
+    TaskContainer.appendChild(TaskMarker);
+    TaskContainer.appendChild(TaskText);
+    TaskContainer.appendChild(TaskDescription);
+    return TaskContainer
+  }
 }
+
+
 
 export default DOMController

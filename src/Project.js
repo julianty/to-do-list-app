@@ -1,5 +1,11 @@
+// Projects control their own task lists
+// Projects can add and remove tasks
+// Projects can edit the properties of their tasks
+// Projects can alter their own statuses
 
-let ProjectActions = {
+import DOMController from "./DOMController";
+
+const Project = {
   _createTask(title, description, dueDate, priority) {
     return {
       title,
@@ -11,6 +17,7 @@ let ProjectActions = {
   addTask(title, description, dueDate, priority) {
     let Task = this._createTask(title, description, dueDate, priority)
     this.taskList.push(Task)
+    DOMController.appendTask(this, Task);
   },
   printTasks() {
     // console.log(this.taskList);
@@ -34,17 +41,25 @@ let ProjectActions = {
     });
     this.status = newStatus;    
   },
+
+  saveData() {
+    // Keeps a JSON of the projects and their todos as well as their properties
+    // console.log(storageAvailable('localStorage'));
+    if (!storageAvailable('localStorage')) {
+      console.log('localStorage not available');
+      return
+    } else {
+      localStorage.setItem(this.name, JSON.stringify(this));
+    }
+  },
+
+  loadData(projectName) {
+    let Project = localStorage.getItem(projectName);
+    return JSON.parse(Project)
+  },
 };
 
-
-function createProject(name, tags=null) {
-  let Project = Object.create(ProjectActions);
-  Project.name = name;
-  Project.tags = tags;
-  Project.taskList = [];
-  Project.status = 'incomplete';
-  Project.DivContainer;
-  return Project
-}
-
-export default createProject;
+export default Project
+// export default createProject;
+// export default {createProject, ProjectActions};
+// export {createProject, ProjectActions};
