@@ -1,5 +1,6 @@
 import EventHandler from "./EventHandler";
 import RightArrowFile from "./chevron-right.svg";
+import DeleteFile from "./delete.svg";
 import ProjectController from "./ProjectController";
 
 const DOMController =  {
@@ -12,13 +13,13 @@ const DOMController =  {
     return element
   },
 
-  addToDOM(Project) {
+  addToDOM(Project, id) {
     // Finds container
     const ProjectContainer = document.querySelector('div.project-container');
     // Creates the new container
     const NewProject = this.createElement('div', 'project');
     NewProject.classList.add('incomplete');
-
+    NewProject.id = id;
     const ProjectHeader = (() => {
       // Creates the project header
       const ProjectHeader = this.createElement('div', 'project-header');
@@ -41,23 +42,6 @@ const DOMController =  {
     // Create task container
     const TasksList = this.createElement('div', 'task-list');
     Project.taskList.forEach(task => {
-      // const TaskContainer = this.createElement('div', 'task-container');
-      // const TaskMarker = new Image();
-      // TaskMarker.src = RightArrowFile;
-      // TaskMarker.addEventListener('click', e => EventHandler(e));
-
-      // TaskMarker.classList.add('task-marker');
-      // const TaskText = this.createElement('p', 'task');
-      // TaskText.contentEditable = true;
-      // TaskText.addEventListener('input', e => EventHandler(e));
-      // TaskText.textContent = task.title;
-
-      // const TaskDescription = this.createElement('p', 'task-description');
-      // TaskDescription.textContent = task.description;
-      // TaskContainer.appendChild(TaskMarker);
-      // TaskContainer.appendChild(TaskText);
-      // TaskContainer.appendChild(TaskDescription);
-      // TasksList.appendChild(TaskContainer);
       TasksList.appendChild(this.createTaskDom(task))
     })
 
@@ -88,13 +72,14 @@ const DOMController =  {
     });
   },
 
-  appendTask(Project, Task) {
+  appendTask(Project, Task, taskId) {
     const TaskList = Project.DivContainer.children[1];
-    TaskList.appendChild(this.createTaskDom(Task));
+    TaskList.appendChild(this.createTaskDom(Task, taskId))
   },
 
-  createTaskDom(task) {
+  createTaskDom(Task, taskId) {
     const TaskContainer = this.createElement('div', 'task-container');
+    TaskContainer.id = taskId;
     const TaskMarker = new Image();
     TaskMarker.src = RightArrowFile;
     TaskMarker.addEventListener('click', e => EventHandler(e));
@@ -103,12 +88,18 @@ const DOMController =  {
     const TaskText = this.createElement('p', 'task');
     TaskText.contentEditable = true;
     TaskText.addEventListener('input', e => EventHandler(e));
-    TaskText.textContent = task.title;
+    TaskText.textContent = Task.title;
 
     const TaskDescription = this.createElement('p', 'task-description');
-    TaskDescription.textContent = task.description;
+    TaskDescription.textContent = Task.description;
     TaskContainer.appendChild(TaskMarker);
     TaskContainer.appendChild(TaskText);
+
+    const DeleteMarker = new Image();
+    DeleteMarker.src = DeleteFile;
+    DeleteMarker.classList.add('delete-task-marker');
+    DeleteMarker.addEventListener('click', e => EventHandler(e));
+    TaskContainer.appendChild(DeleteMarker);
     TaskContainer.appendChild(TaskDescription);
     return TaskContainer
   }

@@ -46,9 +46,21 @@ const ProjectController = (() => {
       NewProject.taskList = loadedProject.taskList;
       NewProject.status = loadedProject.status;
     }
-    NewProject.DivContainer = DOMController.addToDOM(NewProject);
+    const id = projectList.length;
+    NewProject.id = id;
+    NewProject.DivContainer = DOMController.addToDOM(NewProject, id);
     projectList.push(NewProject);
     return NewProject
+  };
+
+  const removeTask = (projectIdx, taskId) => {
+    // console.log(projectIdx, taskId);
+    // console.log(projectList[projectIdx]);
+    // May be better to seach through the project list to find a matching Id
+    // Might need to find a way to generate a unique ID as well
+    const TargetProject = projectList[projectIdx];
+    TargetProject.taskList.splice(taskId, 1);
+
   };
 
   const saveData = () => {
@@ -70,6 +82,7 @@ const ProjectController = (() => {
   return {
     projectList,
     createProject,
+    removeTask,
     saveData,
     loadData,
   };

@@ -1,6 +1,7 @@
 import RightArrowFile from "./chevron-right.svg";
 import DownArrowFile from "./chevron-down.svg";
 import ProjectController from "./ProjectController";
+import Project from "./Project";
 
 
 function EventHandler(Event) {
@@ -24,7 +25,17 @@ function EventHandler(Event) {
       }
       TargetClassList.toggle('active');
       break;
-
+    
+    case TargetClassList.contains('delete-task-marker'):
+      // console.log('Delete Marker Pressed');
+      // tell ProjectController to delete target via div.project-container
+      // console.log(Target.parentNode.parentNode.parentNode);
+      let ProjContainer = Target.parentNode.parentNode.parentNode;
+      let TaskContainer = Target.parentNode;
+      ProjectController.removeTask(ProjContainer.id, TaskContainer.id);
+      // console.log(TargetProjContainer);
+      // remove task from the dom
+      break;
     default:
       console.log(TargetClassList);
       break;

@@ -6,18 +6,24 @@
 import DOMController from "./DOMController";
 
 const Project = {
-  _createTask(title, description, dueDate, priority) {
+  taskList: [],
+  id: null,
+  _createTask(title, description, dueDate, priority, id=null) {
+    if (id == null) id = Date.now();
     return {
       title,
       description,
       dueDate,
-      priority
+      priority,
+      id,
     }
   },
   addTask(title, description, dueDate, priority) {
     let Task = this._createTask(title, description, dueDate, priority)
+    const taskId = this.taskList.length;
+    Task.id = taskId;
     this.taskList.push(Task)
-    DOMController.appendTask(this, Task);
+    DOMController.appendTask(this, Task, taskId);
   },
   printTasks() {
     // console.log(this.taskList);
